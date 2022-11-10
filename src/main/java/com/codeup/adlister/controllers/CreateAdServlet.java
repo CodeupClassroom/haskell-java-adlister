@@ -13,16 +13,19 @@ import java.io.IOException;
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // show the form to create an Ad
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
             .forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // create a new Ad instance from the data received from the form.
         Ad ad = new Ad(
             1, // for now we'll hardcode the user id
             request.getParameter("title"),
             request.getParameter("description")
         );
+        // Use DAO to insert new Ad into the DB.
         DaoFactory.getAdsDao().insert(ad);
         response.sendRedirect("/ads");
     }

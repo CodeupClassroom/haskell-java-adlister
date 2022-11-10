@@ -7,6 +7,8 @@ public class DaoFactory {
 
     public static Ads getAdsDao() {
         if (adsDao == null) {
+            // instantiate MySQLAdsDao so we can use the query methods inside.
+            // passing config so that we can give creds to our MySQL server
             adsDao = new MySQLAdsDao(config);
         }
         return adsDao;
@@ -14,6 +16,8 @@ public class DaoFactory {
 
     public static Users getUsersDao() {
         if (usersDao == null) {
+            // instantiate MySQLUsersDao so we can use the query methods inside.
+            // passing config so that we can give creds to our MySQL server
             usersDao = new MySQLUsersDao(config);
         }
         return usersDao;
